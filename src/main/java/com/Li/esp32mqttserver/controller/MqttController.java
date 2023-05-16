@@ -21,19 +21,6 @@ public class MqttController {
      */
     @Autowired
     private RedisUtil redisUtil;
-    @PostMapping("/test")
-    public ResponseResult test(String user, String topicName){
-        redisUtil.set(user,topicName);
-        System.out.println(user+"  "+topicName);
-        System.out.println(redisUtil.get(user));
-        return ResponseResult.success(redisUtil.get(user));
-    }
-    @PostMapping("/test2")
-    public ResponseResult test2(String user){
-        System.out.println(redisUtil.get(user));
-        return ResponseResult.success(redisUtil.get(user));
-    }
-
     /**
      * 创建主题
      * @param topicName
