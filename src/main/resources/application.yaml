@@ -1,5 +1,8 @@
 server:
   port: 8081
+  servlet:
+    context-path: /service
+
 ## MQTT
 mqtt:
   host: tcp://127.0.0.1:1883
@@ -9,6 +12,7 @@ mqtt:
   clientId: serve
   timeout: 10
   keepalive: 20
+##Spring MYSQL
 spring:
   data:
     redis:
@@ -22,3 +26,20 @@ spring:
           max-idle: 20
           min-idle: 5
       connect-timeout: 5000ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher

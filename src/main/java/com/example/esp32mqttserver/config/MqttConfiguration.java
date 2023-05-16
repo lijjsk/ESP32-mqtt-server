@@ -1,4 +1,4 @@
-package com.example.esp32mqttserver.entity.config;
+package com.example.esp32mqttserver.config;
 
 import com.example.esp32mqttserver.mqtt.MyMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;

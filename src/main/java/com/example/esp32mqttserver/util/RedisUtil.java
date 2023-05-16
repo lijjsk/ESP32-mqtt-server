@@ -9,15 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author: muxiongxiong
- * @date: 2023年02月22日 下午 5:48
- * 公众号：雄雄的小课堂
- * 博客：https://blog.csdn.net/qq_34137397
- * 个人站：http://www.穆雄雄.com
- * 个人站：http://www.muxiongxiong.cn
- * @Description: redis工具类
- */
 @Component
 public class RedisUtil {
 

@@ -7,15 +7,6 @@ import com.example.esp32mqttserver.mqtt.MyMqttClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * @author: muxiongxiong
- * @date: 2023年02月18日 下午 3:12
- * 公众号：雄雄的小课堂
- * 博客：https://blog.csdn.net/qq_34137397
- * 个人站：http://www.穆雄雄.com
- * 个人站：http://www.muxiongxiong.cn
- * @Description: 类的描述
- */
 @RestController
 @RequestMapping("/mqtt")
 public class MqttController {

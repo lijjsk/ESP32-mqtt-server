@@ -8,12 +8,6 @@ import java.util.Map;
 import static com.example.esp32mqttserver.entity.ResultCode.*;
 
 
-/**
- * @Description: TODO
- * @author: 穆雄雄
- * @date: 2023/3/5 下午 7:20
- * @Return: 统一返回结果类
- */
 @Data
 public class ResponseResult {
     /**

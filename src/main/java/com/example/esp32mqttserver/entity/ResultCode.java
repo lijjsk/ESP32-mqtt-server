@@ -1,12 +1,5 @@
 package com.example.esp32mqttserver.entity;
 
-
-/**
- * @Description: TODO
- * @author: 穆雄雄
- * @date: 2023/3/5 下午 7:20
- * @Return: 响应码枚举 - 可参考HTTP状态码的语义
- */
 public enum ResultCode {
     //成功
     SUCCESS( 200, "SUCCESS" ),
