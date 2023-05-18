@@ -1,11 +1,11 @@
-package com.Li.esp32mqttserver.domain;
+package com.Li.esp32mqttserver.Response;
 
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.Li.esp32mqttserver.domain.ResultCode.*;
+import static com.Li.esp32mqttserver.Response.ResultCode.*;
 
 
 @Data
@@ -26,7 +26,10 @@ public class ResponseResult {
     private Object data;
 
     private Map<String,Object> extra = new HashMap<>();
-
+    public ResponseResult(Integer code, String v) {
+        this.code = code;
+        this.message = message;
+    }
     public ResponseResult putExtra(String key, Object value) {
         this.extra.put(key, value);
         return this;

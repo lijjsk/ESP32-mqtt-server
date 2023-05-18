@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+//mqtt服务器连接配置类
 @Configuration
 public class MqttConfig {
     private static final Logger log = LoggerFactory.getLogger(MqttConfig.class);

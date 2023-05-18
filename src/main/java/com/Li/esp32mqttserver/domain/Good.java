@@ -7,15 +7,17 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class good {
+@ToString
+public class Good {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String gid;
+    private Long gid;
     private String name;
     private Double price;
     private String goodsDetails;

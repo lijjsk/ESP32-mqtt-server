@@ -2,7 +2,7 @@ package com.Li.esp32mqttserver.controller;
 
 import com.Li.esp32mqttserver.util.RedisUtil;
 import com.Li.esp32mqttserver.domain.MqttMsg;
-import com.Li.esp32mqttserver.domain.ResponseResult;
+import com.Li.esp32mqttserver.Response.ResponseResult;
 import com.Li.esp32mqttserver.mqtt.MyMqttClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

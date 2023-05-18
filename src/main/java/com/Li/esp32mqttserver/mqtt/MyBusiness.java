@@ -1,4 +1,4 @@
-package com.Li.esp32mqttserver.domain;
+package com.Li.esp32mqttserver.mqtt;
 
 import com.Li.esp32mqttserver.mqtt.MyMqttClient;
 import jakarta.annotation.PostConstruct;
