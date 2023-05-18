@@ -1,5 +1,8 @@
 package com.Li.esp32mqttserver.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,21 +19,23 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class User{
 
     /**
      * 主键
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * 用户名
      */
-    private String Name;
+    private String name;
     /**
      * 密码
      */
-    private String Pass;
+    private String pass;
     /**
      * 账号状态（0正常 1停用）
      */
