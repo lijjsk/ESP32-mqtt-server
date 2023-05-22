@@ -1,11 +1,17 @@
 package com.Li.esp32mqttserver.service;
 
-import com.Li.esp32mqttserver.dao.FacilityDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.Li.esp32mqttserver.domain.Facility;
 
-@Service
-public class FacilityService {
-    @Autowired
-    private FacilityDao facilityDao;
+import java.util.List;
+
+public interface FacilityService {
+    boolean deleteFacilityById(Long id);
+
+    Facility addFacility(Facility facility);
+
+    Facility getFacilityById(Long id);
+
+    List<Facility> getAllFacilities();
+
+    Facility updateFacility(Facility facility);
 }
