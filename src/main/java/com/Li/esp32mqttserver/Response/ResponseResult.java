@@ -26,7 +26,7 @@ public class ResponseResult {
     private Object data;
 
     private Map<String,Object> extra = new HashMap<>();
-    public ResponseResult(Integer code, String v) {
+    public ResponseResult(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

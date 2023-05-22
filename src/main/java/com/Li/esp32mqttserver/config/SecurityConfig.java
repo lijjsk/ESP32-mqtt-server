@@ -28,9 +28,11 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/hello").permitAll()
+                        .requestMatchers("/main").permitAll()
                         .requestMatchers("/user/login").permitAll()
                         .requestMatchers("/user/logout").permitAll()
+                        .requestMatchers("/user/register").permitAll()
+                        .requestMatchers("/user/test").permitAll()
                         .anyRequest().denyAll());
         //把token校验过滤器添加到过滤器链中
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
