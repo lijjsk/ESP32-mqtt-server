@@ -1,7 +1,7 @@
 package com.Li.esp32mqttserver.config.authentication;
 
 import com.Li.esp32mqttserver.response.JsonResult;
-import com.Li.esp32mqttserver.response.ResultCode;
+import com.Li.esp32mqttserver.response.ResultEnum;
 import com.Li.esp32mqttserver.response.ResultTool;
 import com.alibaba.fastjson.JSON;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class CustomizeAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        JsonResult result = ResultTool.fail(ResultCode.USER_NOT_LOGIN);
+        JsonResult result = ResultTool.fail(ResultEnum.USER_NOT_LOGIN);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(JSON.toJSONString(result));
     }

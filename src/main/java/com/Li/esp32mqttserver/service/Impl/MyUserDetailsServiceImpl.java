@@ -1,6 +1,6 @@
-package com.Li.esp32mqttserver.service;
+package com.Li.esp32mqttserver.service.Impl;
 
-import com.Li.esp32mqttserver.dao.UserDao;
+import com.Li.esp32mqttserver.dao.IUserDao;
 import com.Li.esp32mqttserver.domain.LoginUser;
 import com.Li.esp32mqttserver.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private UserDao userDao;
+    private IUserDao IUserDao;
     //实现UserDetailsService接口，重写UserDetails方法，自定义用户的信息从数据中查询
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         //（认证，即校验该用户是否存在）查询用户信息
-        User user = userDao.findUserByName(name);
+        User user = IUserDao.findUserByName(name);
         //如果没有查询到用户
         if (Objects.isNull(user)){
             throw new RuntimeException("用户名或者密码错误");

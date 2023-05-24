@@ -1,9 +1,10 @@
 package com.Li.esp32mqttserver.controller;
 
 import com.Li.esp32mqttserver.domain.LoginUser;
+import com.Li.esp32mqttserver.response.JsonResult;
 import com.Li.esp32mqttserver.response.ResponseResult;
 import com.Li.esp32mqttserver.domain.User;
-import com.Li.esp32mqttserver.service.UserService;
+import com.Li.esp32mqttserver.service.Impl.UserServiceImpl;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,16 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     //用户注册
     @RequestMapping("/register")
-    public ResponseResult registerStudent(@RequestBody User user){
-        return userService.registerStudent(user);
+    public JsonResult registerUser(@RequestBody User user){
+        return userServiceImpl.registerUser(user);
     }
     //用户登出
     @RequestMapping("/mylogout")
-    public ResponseResult logout(){
-        return userService.logout();
+    public JsonResult logout(){
+        return userServiceImpl.logout();
     }
     //测试用
     @RequestMapping("/success")
@@ -50,8 +51,8 @@ public class UserController {
     }
     //登录信息获取表单
     @RequestMapping("/loginForm")
-    public ResponseResult loginForm(@RequestBody User user){
-        return userService.login(user);
+    public JsonResult loginForm(@RequestBody User user){
+        return userServiceImpl.login(user);
     }
     //展示个人信息接口
     @RequestMapping("/myInfo2")
@@ -60,7 +61,7 @@ public class UserController {
     }
     //未完善版本
     @RequestMapping("/myInfo")
-    public User getUserInfo(@RequestParam Long userid){
-        return userService.getUserInfo(userid);
+    public JsonResult getUserInfo(@RequestParam Long userid){
+        return userServiceImpl.getUserInfo(userid);
     }
 }

@@ -1,8 +1,6 @@
 package com.Li.esp32mqttserver.response;
 
-import com.Li.esp32mqttserver.response.JsonResult;
-import com.Li.esp32mqttserver.response.ResultCode;
-
+//统一JSON返回结果构造器
 public class ResultTool {
     public static JsonResult success() {
         return new JsonResult(true);
@@ -15,7 +13,7 @@ public class ResultTool {
     public static JsonResult fail() {
         return new JsonResult(false);
     }
-    public static JsonResult fail(ResultCode resultEnum){
+    public static JsonResult fail(ResultEnum resultEnum){
         return new JsonResult(false,resultEnum);
     }
 }

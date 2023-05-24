@@ -1,6 +1,6 @@
 package com.Li.esp32mqttserver.config.authentication;
 import com.Li.esp32mqttserver.response.JsonResult;
-import com.Li.esp32mqttserver.response.ResultCode;
+import com.Li.esp32mqttserver.response.ResultEnum;
 import com.Li.esp32mqttserver.response.ResultTool;
 import com.alibaba.fastjson.JSON;
 import jakarta.servlet.ServletException;
@@ -20,14 +20,14 @@ public class CustomizeAuthenticationFailureHandler implements AuthenticationFail
         JsonResult result = null;
         if (exception instanceof BadCredentialsException) {
             //密码错误
-            result = ResultTool.fail(ResultCode.USER_CREDENTIALS_ERROR);
+            result = ResultTool.fail(ResultEnum.USER_CREDENTIALS_ERROR);
         } else if (exception instanceof InternalAuthenticationServiceException) {
             //用户不存在
-            result = ResultTool.fail(ResultCode.USER_ACCOUNT_NOT_EXIST);
+            result = ResultTool.fail(ResultEnum.USER_ACCOUNT_NOT_EXIST);
         }
         else{
             //其他错误
-            result = ResultTool.fail(ResultCode.FAILURE);
+            result = ResultTool.fail(ResultEnum.FAILURE);
             exception.printStackTrace();
         }
         //处理编码方式，防止中文乱码的情况

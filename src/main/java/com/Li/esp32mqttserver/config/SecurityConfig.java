@@ -4,7 +4,7 @@ import com.Li.esp32mqttserver.config.authentication.CustomizeAuthenticationEntry
 import com.Li.esp32mqttserver.config.authentication.CustomizeAuthenticationFailureHandler;
 import com.Li.esp32mqttserver.config.authentication.CustomizeAuthenticationSuccessHandler;
 import com.Li.esp32mqttserver.config.authentication.CustomizeLogoutSuccessHandler;
-import com.Li.esp32mqttserver.service.MyUserDetailsService;
+import com.Li.esp32mqttserver.service.Impl.MyUserDetailsServiceImpl;
 import com.Li.esp32mqttserver.util.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Autowired
-    MyUserDetailsService userDetailsService;
+    MyUserDetailsServiceImpl userDetailsService;
     @Autowired
     CustomizeAuthenticationEntryPoint customizeAuthenticationEntryPoint;
     @Autowired
@@ -43,7 +43,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         //定义不需要认证就可以访问的界面,测试时可以选择开放需要的controller接口
-                        .requestMatchers("/mylogin","/static/**","/","/index").permitAll()
+                        .requestMatchers("/mylogin","/static/**","/","/index","/Goods/**","/Facility/**","/register").permitAll()
                         .anyRequest().authenticated());//其余所有请求都需要登录认证才能访问
         http
                 //启用默认登录页面

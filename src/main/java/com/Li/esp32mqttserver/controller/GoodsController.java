@@ -18,9 +18,9 @@ public class GoodsController {
     }
 
     @PostMapping(value = "/add")
-    public boolean addGoods(@RequestBody Good goods){
+    public Good addGoods(@RequestBody Good goods){
         Good goods1 = goodsService.addGoods(goods);
-        return goods1 != null;
+        return goods1;
     }
 
     @DeleteMapping (value = "/delete/{id}")

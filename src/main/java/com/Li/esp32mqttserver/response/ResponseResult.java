@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.Li.esp32mqttserver.response.ResultCode.*;
+import static com.Li.esp32mqttserver.response.ResultEnum.*;
 
-
+//已弃用
 @Data
 public class ResponseResult {
     /**

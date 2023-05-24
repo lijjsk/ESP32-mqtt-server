@@ -13,7 +13,7 @@ public class FacilityServiceImpl implements FacilityService {
     private IFacilityDao iFacilityDao;
     @Override
     public boolean deleteFacilityById(Long id) {
-        return iFacilityDao.deletefacilityByClientId(id);
+        return iFacilityDao.deleteFacilityByClientId(id);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Facility getFacilityById(Long id) {
-        return iFacilityDao.findfacilityByClientId(id);
+        return iFacilityDao.findFacilityByClientId(id);
     }
 
     @Override

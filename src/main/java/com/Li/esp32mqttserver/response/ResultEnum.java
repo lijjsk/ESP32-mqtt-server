@@ -1,6 +1,7 @@
 package com.Li.esp32mqttserver.response;
 
-public enum ResultCode {
+//统一返回结果枚举类
+public enum ResultEnum {
     //成功
     SUCCESS( 200, "SUCCESS" ),
     //失败
@@ -53,7 +54,7 @@ public enum ResultCode {
     public int code;
     public String message;
 
-    ResultCode(int code, String message) {
+    ResultEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -73,5 +74,20 @@ public enum ResultCode {
     public void setMessage(String message) {
         this.message = message;
     }
+    /**
+     * 根据code获取message
+     *
+     * @param code 状态码
+     * @return msg
+     */
+    public static String getMsgByCode(Integer code) {
+        for (ResultEnum ele : values()) {
+            if (ele.getCode()==code) {
+                return ele.getMessage();
+            }
+        }
+        return null;
+    }
+
 }
 
