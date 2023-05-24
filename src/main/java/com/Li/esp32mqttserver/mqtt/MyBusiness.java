@@ -1,6 +1,5 @@
 package com.Li.esp32mqttserver.mqtt;
 
-import com.Li.esp32mqttserver.mqtt.MyMqttClient;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

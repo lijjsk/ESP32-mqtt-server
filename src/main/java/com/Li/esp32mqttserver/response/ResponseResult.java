@@ -1,11 +1,11 @@
-package com.Li.esp32mqttserver.Response;
+package com.Li.esp32mqttserver.response;
 
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.Li.esp32mqttserver.Response.ResultCode.*;
+import static com.Li.esp32mqttserver.response.ResultCode.*;
 
 
 @Data
@@ -40,7 +40,7 @@ public class ResponseResult {
     }
 
     public static ResponseResult error() {
-        return new ResponseResult(FAILURE.getCode(), ERROR.getDesc(), null);
+        return new ResponseResult(FAILURE.getCode(), ERROR.getMessage(), null);
     }
 
     public static ResponseResult error(Integer code, String message) {
@@ -48,11 +48,11 @@ public class ResponseResult {
     }
 
     public static ResponseResult success() {
-        return new ResponseResult(SUCCESS.getCode(), SUCCESS.getDesc(), null);
+        return new ResponseResult(SUCCESS.getCode(), SUCCESS.getMessage(), null);
     }
 
     public static ResponseResult success(Object data) {
-        return new ResponseResult(SUCCESS.getCode(),SUCCESS.getDesc(), data);
+        return new ResponseResult(SUCCESS.getCode(),SUCCESS.getMessage(), data);
     }
 
     public static ResponseResult success(String message, Object data) {

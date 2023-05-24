@@ -1,4 +1,4 @@
-package com.Li.esp32mqttserver.Response;
+package com.Li.esp32mqttserver.response;
 
 public enum ResultCode {
     //成功
@@ -19,7 +19,16 @@ public enum ResultCode {
     // 系统级别错误码
     ERROR(-1, "操作异常"),
     ERROR_DEFAULT(500,"系统繁忙，请稍后重试"),
-    NOT_LOGIN(401, "请先登录!"),
+    /* 用户错误 */
+    USER_NOT_LOGIN(2001, "用户未登录"),
+    USER_ACCOUNT_EXPIRED(2002, "账号已过期"),
+    USER_CREDENTIALS_ERROR(2003, "密码错误"),
+    USER_CREDENTIALS_EXPIRED(2004, "密码过期"),
+    USER_ACCOUNT_DISABLE(2005, "账号不可用"),
+    USER_ACCOUNT_LOCKED(2006, "账号被锁定"),
+    USER_ACCOUNT_NOT_EXIST(2007, "账号不存在"),
+    USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
+    USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
     NO_PERMISSION(-7,"无权限"),
     ERROR_PASSWORD(-8,"用户帐号或者密码错误!"),
     DISABLE_ACCOUNT(-9,"帐号已被禁用!"),
@@ -42,11 +51,11 @@ public enum ResultCode {
     ARTICLE_NOT_EXIST(10023,"数据库未存在该文章!");
 
     public int code;
-    public String desc;
+    public String message;
 
-    ResultCode(int code, String desc) {
+    ResultCode(int code, String message) {
         this.code = code;
-        this.desc = desc;
+        this.message = message;
     }
 
     public int getCode() {
@@ -57,12 +66,12 @@ public enum ResultCode {
         this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getMessage() {
+        return message;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
 

@@ -1,6 +1,6 @@
 package com.Li.esp32mqttserver.service;
 
-import com.Li.esp32mqttserver.Response.ResponseResult;
+import com.Li.esp32mqttserver.response.ResponseResult;
 import com.Li.esp32mqttserver.dao.UserDao;
 import com.Li.esp32mqttserver.domain.LoginUser;
 import com.Li.esp32mqttserver.domain.User;
@@ -75,5 +75,25 @@ public class UserService {
         //在数据库中删除操作
         userDao.deleteById(userid);
         return new ResponseResult(200,"注销成功");
+    }
+    //用户信息更新
+    public ResponseResult update(User user){
+        try{
+            //获取密码编码器
+            PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+            //将用户的密码进行编码
+            String password = passwordEncoder.encode(user.getPass());
+            //将编码后的密码覆盖到用户信息中
+            user.setPass(password.substring(8));
+            //将用户信息持久化到数据库中
+            userDao.save(user);
+        }catch(Exception e){
+            return new ResponseResult(400,"更新失败");
+        }
+        return new ResponseResult(200,"更新成功");
+    }
+    //获取当前登录的用户的信息（未完善）
+    public User getUserInfo(Long userid){
+        return userDao.findUserById(userid);
     }
 }
