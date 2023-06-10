@@ -15,7 +15,6 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clientId;
-    @OneToOne(fetch= FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "gid")
-    private Good gId;
+    private String name;
+    private Long gId;
 }

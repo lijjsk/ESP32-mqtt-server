@@ -1,10 +1,12 @@
 package com.Li.esp32mqttserver.dao;
 
 import com.Li.esp32mqttserver.domain.Facility;
+import com.Li.esp32mqttserver.domain.Good;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IFacilityDao extends JpaRepository<Facility,Long>{
-    Facility findFacilityByClientId(Long id);
+import java.util.List;
 
-    boolean deleteFacilityByClientId(Long id);
+public interface IFacilityDao extends JpaRepository<Facility,Long>{
+    List<Facility> findFacilitiesByName(String name);
+    Facility findFacilityBygId(Long gId);
 }

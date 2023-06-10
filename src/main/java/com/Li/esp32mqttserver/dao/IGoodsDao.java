@@ -1,13 +1,18 @@
 package com.Li.esp32mqttserver.dao;
 
 import com.Li.esp32mqttserver.domain.Good;
+import com.Li.esp32mqttserver.response.JsonResult;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface IGoodsDao extends JpaRepository<Good,String>{
+import java.util.List;
 
-        boolean deleteGoodsByGid(Long gid);
+public interface IGoodsDao extends JpaRepository<Good,Long>{
+        @Transactional
+        Long deleteGoodsByGid(Long gid);
 
-        Good findGoodsByGid(Long gid);
+        List<Good> findGoodsByName(String name);
 
+        Good findGoodByGid(Long id);
 
 }

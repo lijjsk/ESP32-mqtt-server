@@ -5,7 +5,8 @@ public enum ResultEnum {
     //成功
     SUCCESS( 200, "SUCCESS" ),
     //失败
-    FAILURE( 400, "FAILURE" ),
+//    FAILURE( 400, "FAILURE" ),
+    FAILURE(400,"注册失败"),
     /**
      * qq登录错误
      */

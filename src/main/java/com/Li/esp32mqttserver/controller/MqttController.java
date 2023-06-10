@@ -1,12 +1,13 @@
 package com.Li.esp32mqttserver.controller;
 
+import com.Li.esp32mqttserver.response.JsonResult;
+import com.Li.esp32mqttserver.response.ResultTool;
 import com.Li.esp32mqttserver.util.RedisUtil;
 import com.Li.esp32mqttserver.domain.MqttMsg;
-import com.Li.esp32mqttserver.response.ResponseResult;
 import com.Li.esp32mqttserver.mqtt.MyMqttClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+//用于测试mqtt的控制类
 @RestController
 @RequestMapping("/mqtt")
 public class MqttController {
@@ -27,10 +28,10 @@ public class MqttController {
      * @return
      */
     @PostMapping("/createTopic")
-    public ResponseResult createTopic(String user, String topicName){
+    public JsonResult createTopic(String user, String topicName){
         //直接将主题放在缓存中，用的时候从缓存中取出来
         redisUtil.set(user,topicName);
-        return ResponseResult.success("创建成功，主题为："+topicName);
+        return ResultTool.success("创建成功，主题为："+topicName);
     }
 
     /**
@@ -39,29 +40,29 @@ public class MqttController {
      * @return
      */
     @PostMapping("/getTopic")
-    public ResponseResult getTopic(String user){
+    public JsonResult getTopic(String user){
         String topicName = redisUtil.get(user).toString();
-        return ResponseResult.success(topicName);
+        return ResultTool.success(topicName);
     }
 
     /**
      * 订阅主题
      */
     @PostMapping("/subscribeTopic")
-    public ResponseResult subscribeTopic(String user){
+    public JsonResult subscribeTopic(String user){
         String topicName = redisUtil.get(user).toString();
         myMqttClient.subscribe(topicName,1);
-        return ResponseResult.success("订阅"+topicName+"主题成功");
+        return ResultTool.success("订阅"+topicName+"主题成功");
     }
 
     /**
      * 取消订阅主题
      */
     @PostMapping("/cleanSubscribeTopic")
-    public ResponseResult cleanSubscribeTopic(String user){
+    public JsonResult cleanSubscribeTopic(String user){
         String topicName = redisUtil.get(user).toString();
         myMqttClient.cleanTopic(topicName);
-        return ResponseResult.success("取消订阅"+topicName+"主题成功");
+        return ResultTool.success("取消订阅"+topicName+"主题成功");
     }
 
 
@@ -70,11 +71,11 @@ public class MqttController {
      */
     @PostMapping("/sendMsg")
     @ResponseBody
-    public  synchronized ResponseResult sendMsg(@RequestBody MqttMsg mqttMsg){
+    public  synchronized JsonResult sendMsg(@RequestBody MqttMsg mqttMsg){
         String result = "给主题："+mqttMsg.getTopicName()+"发送成功";
         //发送消息
         myMqttClient.publish(mqttMsg.getContent(),mqttMsg.getTopicName(),mqttMsg.getQos());
-        return ResponseResult.success(result);
+        return ResultTool.success(result);
     }
 }
 

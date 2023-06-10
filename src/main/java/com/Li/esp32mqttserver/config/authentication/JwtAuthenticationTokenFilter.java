@@ -1,7 +1,9 @@
-package com.Li.esp32mqttserver.util;
+package com.Li.esp32mqttserver.config.authentication;
 
 import com.Li.esp32mqttserver.domain.LoginUser;
 import com.Li.esp32mqttserver.redis.RedisCache;
+import com.Li.esp32mqttserver.util.JwtUtil;
+import com.alibaba.fastjson2.JSON;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -34,6 +37,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         //解析token
         String userid;
+        //System.out.println("当前用户token为"+token);
         try {
             Claims claims = JwtUtil.parseJWT(token);
             userid = claims.getSubject();
@@ -43,19 +47,35 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         //从redis中获取用户信息
         String redisKey = "login:" + userid;
-        LoginUser loginUser = redisCache.getCacheObject(redisKey);
+        //解决从redis中取出的对象无法重新转换为LoginUser对象的问题，通过将对象转化为JSON类型字符串再重新转化为LoginUser
+        Object object = redisCache.getCacheObject(redisKey);
+        LoginUser loginUser;
+        if (object instanceof LoginUser){
+            loginUser = (LoginUser) object;
+        }else{
+            loginUser = JSON.parseObject(JSON.toJSON(object).toString(), LoginUser.class);
+        }
+        //System.out.println("当前用户信息为"+loginUser);
+        //错误代码
+        //LoginUser loginUser = redisCache.getCacheObject(redisKey);
         if(Objects.isNull(loginUser)){
             throw new RuntimeException("用户未登录");
         }
-        System.out.println(loginUser);
         //封装Authentication对象存入SecurityContextHolder
-        //TODO 获取权限信息封装到Authentication中
-
+        //不配置权限,只要token正确就允许登录
+        //System.out.println(loginUser.getPassword());
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginUser,null,null);
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         //放行
-        filterChain.doFilter(request, response);
+        try{
+            filterChain.doFilter(request, response);
+            System.out.println("放行成功");
+        }catch (Exception e){
+            System.out.println("放行失败");
+            e.printStackTrace();
+        }
+
     }
 }

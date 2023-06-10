@@ -1,17 +1,17 @@
 package com.Li.esp32mqttserver.service;
 
 import com.Li.esp32mqttserver.domain.Facility;
+import com.Li.esp32mqttserver.response.JsonResult;
 
 import java.util.List;
 
 public interface FacilityService {
-    boolean deleteFacilityById(Long id);
+    JsonResult deleteFacilityById(Long id);
 
-    Facility addFacility(Facility facility);
+    JsonResult updateFacility(Facility facility);
 
-    Facility getFacilityById(Long id);
+    JsonResult getFacilityByName(String name);
 
-    List<Facility> getAllFacilities();
+    JsonResult getAllFacilities();
 
-    Facility updateFacility(Facility facility);
 }

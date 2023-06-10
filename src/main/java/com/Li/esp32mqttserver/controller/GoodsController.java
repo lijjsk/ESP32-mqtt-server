@@ -1,36 +1,41 @@
 package com.Li.esp32mqttserver.controller;
 
 import com.Li.esp32mqttserver.domain.Good;
+import com.Li.esp32mqttserver.response.JsonResult;
 import com.Li.esp32mqttserver.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/Goods")
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @GetMapping(value = "/{gid}")
-    public Good getGoods(@PathVariable Long gid){
-        return goodsService.selectGoods(gid);
+    @GetMapping(value = "/search")
+    public JsonResult getGoods(@RequestParam String name){
+        return goodsService.getGoodsByName(name);
     }
 
-    @PostMapping(value = "/add")
-    public Good addGoods(@RequestBody Good goods){
-        Good goods1 = goodsService.addGoods(goods);
-        return goods1;
-    }
-
-    @DeleteMapping (value = "/delete/{id}")
-    public boolean deleteGoods(@PathVariable Long id){
+    @DeleteMapping (value = "/delete")
+    public JsonResult deleteGoods(@RequestParam Long id){
         return goodsService.deleteGoods(id);
     }
 
     @PutMapping(value = "/update")
-    public boolean updateGoods(@RequestBody Good goods){
-        Good goods1 = goodsService.updateGoods(goods);
-        return goods1 != null;
+    public JsonResult updateGoods(@RequestBody Good good){
+        return goodsService.updateGoods(good);
+    }
+//    @GetMapping(value = "/getPage")
+//    public Page<Good> getPage(Integer pageNum){
+//        return goodsService.listAll(pageNum);
+//    }
+    @GetMapping(value = "/getAllGoods")
+    public JsonResult getAllGoods(){
+        return goodsService.getAllGoods();
     }
 }
